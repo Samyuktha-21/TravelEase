@@ -1,0 +1,136 @@
+.spot-card {
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  text-decoration: none;
+  color: var(--volcanic-ash);
+  height: 100%;
+}
+
+.spot-card-img-wrapper {
+  position: relative;
+  height: 240px;
+  overflow: hidden;
+  border-radius: var(--radius-xl) var(--radius-xl) 0 0;
+}
+
+.spot-card-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform var(--transition-slow);
+}
+
+.spot-card:hover .spot-card-img {
+  transform: scale(1.08);
+}
+
+.spot-category-label {
+  position: absolute;
+  top: 1rem;
+  left: 1rem;
+  background: rgba(15, 23, 42, 0.7);
+  backdrop-filter: blur(8px);
+  padding: 0.5rem 0.75rem;
+  border-radius: var(--radius-full);
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--white);
+  border: 1px solid var(--glass-border);
+}
+
+.spot-card-content {
+  padding: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+}
+
+.spot-card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 1rem;
+  gap: 1rem;
+}
+
+.spot-title {
+  font-size: 1.4rem;
+  margin: 0;
+  color: var(--volcanic-ash);
+}
+
+.spot-desc {
+  color: #334155;
+  font-size: 0.95rem;
+  line-height: 1.5;
+  margin-bottom: 1.5rem;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.crowd-progress-wrapper {
+  margin-bottom: 1.5rem;
+  margin-top: auto;
+}
+
+.crowd-progress-labels {
+  display: flex;
+  justify-content: space-between;
+  font-size: 0.85rem;
+  margin-bottom: 0.5rem;
+  font-weight: 500;
+}
+
+.crowd-label-text {
+  color: var(--volcanic-ash);
+  font-weight: 500;
+}
+
+.crowd-value {
+  color: var(--white);
+  font-weight: 700;
+}
+
+.crowd-progress-bar {
+  width: 100%;
+  height: 6px;
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: var(--radius-full);
+  overflow: hidden;
+}
+
+.crowd-progress-fill {
+  height: 100%;
+  border-radius: var(--radius-full);
+  transition: width 1s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.bg-low { background-color: var(--jungle-mint); }
+.bg-moderate { background-color: #F59E0B; }
+.bg-high { background-color: var(--warm-coral); }
+
+.spot-meta {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+  padding-top: 1.5rem;
+  border-top: 1px solid rgba(0,0,0,0.1);
+  font-size: 0.9rem;
+  color: #334155;
+}
+
+.meta-item {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.meta-item svg {
+  color: var(--jungle-mint);
+}

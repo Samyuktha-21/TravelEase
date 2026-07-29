@@ -1,0 +1,117 @@
+.explore-page {
+  font-family: 'Outfit', sans-serif;
+  background-color: #F0FDFA;
+  color: var(--volcanic-ash);
+  min-height: 100vh;
+  padding-bottom: 5rem;
+}
+
+.explore-hero {
+  background-color: #1E293B;
+  padding: 6rem 2rem 4rem;
+  text-align: center;
+  color: white;
+}
+
+.explore-title {
+  font-family: 'Playfair Display', serif;
+  font-size: 3rem;
+  margin-bottom: 2rem;
+}
+
+.crowd-summary-pills {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+.summary-pill {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.5rem 1rem;
+  border-radius: 50px;
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(8px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  font-size: 0.875rem;
+  font-weight: 500;
+}
+
+.green-dot { background-color: #10B981; }
+.amber-dot { background-color: #F59E0B; }
+.red-dot { background-color: #EF4444; }
+
+.explore-controls {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 2rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+.filters {
+  display: flex;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+}
+
+.filter-pill {
+  background: white;
+  border: 1px solid #e2e8f0;
+  padding: 0.5rem 1rem;
+  border-radius: 50px;
+  color: #475569;
+  cursor: pointer;
+  font-family: 'Outfit', sans-serif;
+  font-weight: 500;
+  transition: all 0.2s;
+}
+
+.filter-pill:hover {
+  border-color: #2DD4BF;
+  color: #2DD4BF;
+}
+
+.filter-pill.active {
+  background-color: #2DD4BF;
+  border-color: #2DD4BF;
+  color: #1E293B;
+}
+
+.sort-select {
+  padding: 0.5rem 1rem;
+  border-radius: 8px;
+  border: 1px solid #e2e8f0;
+  background-color: white;
+  font-family: 'Outfit', sans-serif;
+  color: #1E293B;
+  outline: none;
+  cursor: pointer;
+}
+
+.sort-select:focus {
+  border-color: #2DD4BF;
+}
+
+.explore-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 2rem;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 2rem;
+}
+
+.no-spots-msg {
+  grid-column: 1 / -1;
+  text-align: center;
+  padding: 4rem;
+  color: #64748b;
+  background: white;
+  border-radius: 16px;
+}

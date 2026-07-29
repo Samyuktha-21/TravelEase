@@ -1,0 +1,186 @@
+.transport-page {
+  font-family: 'Outfit', sans-serif;
+  background-color: #F0FDFA;
+  color: var(--volcanic-ash);
+  min-height: 100vh;
+  padding-bottom: 5rem;
+}
+
+.transport-hero {
+  background-color: #1E293B;
+  color: white;
+  padding: 6rem 2rem 4rem;
+  text-align: center;
+}
+
+.transport-title {
+  font-family: 'Playfair Display', serif;
+  font-size: 3rem;
+  margin-bottom: 1rem;
+}
+
+.transport-subtitle {
+  color: #cbd5e1;
+  font-size: 1.125rem;
+}
+
+.transport-content {
+  max-width: 1000px;
+  margin: -2rem auto 0;
+  padding: 0 2rem;
+  position: relative;
+  z-index: 10;
+}
+
+.hubs-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 2rem;
+  margin-bottom: 3rem;
+}
+
+.hub-card {
+  background: white;
+  border-radius: 16px;
+  padding: 2rem;
+  text-align: center;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.05);
+}
+
+.hub-icon {
+  color: #FB7185;
+  margin-bottom: 1rem;
+}
+
+.hub-card h3 {
+  color: #64748b;
+  font-size: 1rem;
+  margin-bottom: 0.5rem;
+}
+
+.hub-name {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.5rem;
+  color: #1E293B;
+  margin: 0 0 0.25rem;
+}
+
+.hub-dist {
+  color: #2DD4BF;
+  font-weight: 600;
+  margin: 0;
+}
+
+.toy-train-banner {
+  background: linear-gradient(135deg, #2DD4BF, #0f766e);
+  border-radius: 16px;
+  padding: 2rem 3rem;
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 4rem;
+  box-shadow: 0 10px 30px rgba(45, 212, 191, 0.3);
+}
+
+.toy-train-content h2 {
+  font-family: 'Playfair Display', serif;
+  font-size: 2rem;
+  margin: 0 0 1rem;
+}
+
+.toy-train-content p {
+  margin: 0;
+  line-height: 1.6;
+  max-width: 600px;
+  font-size: 1.125rem;
+}
+
+.toy-train-banner svg {
+  opacity: 0.5;
+}
+
+.section-heading {
+  font-family: 'Playfair Display', serif;
+  font-size: 2rem;
+  color: #1E293B;
+  margin-bottom: 2rem;
+  text-align: center;
+}
+
+.routes-container {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+.route-card {
+  background: white;
+  border-radius: 16px;
+  padding: 2rem;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.05);
+}
+
+.route-header {
+  border-bottom: 1px solid #f1f5f9;
+  padding-bottom: 1rem;
+  margin-bottom: 1.5rem;
+}
+
+.route-header h3 {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.5rem;
+  color: #1E293B;
+  margin: 0;
+}
+
+.modes-list {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.mode-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem;
+  background: #F0FDFA;
+  border-radius: 8px;
+  border: 1px solid #ccfbf1;
+}
+
+.mode-label {
+  font-weight: 600;
+  color: #0f766e;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  font-size: 0.875rem;
+}
+
+.mode-details {
+  display: flex;
+  gap: 2rem;
+}
+
+.mode-duration, .mode-cost {
+  color: #475569;
+  font-weight: 500;
+}
+
+@media (max-width: 768px) {
+  .toy-train-banner {
+    flex-direction: column;
+    text-align: center;
+    gap: 2rem;
+  }
+  .mode-item {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.5rem;
+  }
+  .mode-details {
+    width: 100%;
+    justify-content: space-between;
+  }
+}

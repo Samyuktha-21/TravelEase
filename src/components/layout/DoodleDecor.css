@@ -1,0 +1,35 @@
+.doodle-container {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  pointer-events: none;
+  z-index: 0;
+}
+
+.doodle-wrapper {
+  position: absolute;
+  color: var(--jungle-mint);
+  opacity: 0.08; /* Very low opacity for premium subtle feel */
+  animation: doodleFloat 12s infinite ease-in-out alternate;
+}
+
+.doodle-svg {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+@keyframes doodleFloat {
+  0% {
+    transform: translateY(0) rotate(0deg);
+  }
+  50% {
+    transform: translateY(-20px) rotate(5deg);
+  }
+  100% {
+    transform: translateY(10px) rotate(-5deg);
+  }
+}

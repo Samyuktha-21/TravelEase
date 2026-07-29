@@ -1,0 +1,160 @@
+.weather-page {
+  font-family: 'Outfit', sans-serif;
+  background-color: #F0FDFA;
+  color: var(--volcanic-ash);
+  min-height: 100vh;
+  padding-bottom: 5rem;
+}
+
+.weather-hero {
+  background-color: #1E293B;
+  color: white;
+  padding: 6rem 2rem 4rem;
+  text-align: center;
+}
+
+.weather-title {
+  font-family: 'Playfair Display', serif;
+  font-size: 3rem;
+  margin-bottom: 1rem;
+}
+
+.weather-subtitle {
+  color: #cbd5e1;
+  font-size: 1.125rem;
+}
+
+.weather-content {
+  max-width: 1200px;
+  margin: -2rem auto 0;
+  padding: 0 2rem;
+  position: relative;
+  z-index: 10;
+}
+
+.weather-stats-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 1.5rem;
+  margin-bottom: 4rem;
+}
+
+.weather-stat-card {
+  background: white;
+  border-radius: 16px;
+  padding: 1.5rem;
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.05);
+}
+
+.weather-stat-card svg {
+  color: #2DD4BF;
+}
+
+.weather-stat-card h3 {
+  font-size: 0.875rem;
+  color: #64748b;
+  margin: 0 0 0.25rem;
+}
+
+.weather-stat-card p {
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: #1E293B;
+  margin: 0;
+}
+
+.section-heading {
+  font-family: 'Playfair Display', serif;
+  font-size: 2rem;
+  color: #1E293B;
+  margin-bottom: 2rem;
+  text-align: center;
+}
+
+.months-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  gap: 1.5rem;
+}
+
+.month-card {
+  background: white;
+  border-radius: 16px;
+  padding: 1.5rem;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.05);
+  transition: transform 0.2s;
+}
+
+.month-card:hover {
+  transform: translateY(-5px);
+}
+
+.month-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1.5rem;
+}
+
+.month-header h3 {
+  margin: 0;
+  font-size: 1.25rem;
+  color: #1E293B;
+}
+
+.season-tag {
+  font-size: 0.75rem;
+  padding: 0.25rem 0.5rem;
+  border-radius: 4px;
+  font-weight: 600;
+  text-transform: uppercase;
+}
+.season-tag.summer { background: #fffbeb; color: #d97706; }
+.season-tag.monsoon { background: #f0f9ff; color: #0369a1; }
+.season-tag.winter { background: #f8fafc; color: #475569; }
+
+.temp-display {
+  display: flex;
+  align-items: baseline;
+  gap: 0.5rem;
+  margin-bottom: 1.5rem;
+}
+
+.high-temp {
+  font-size: 2rem;
+  font-weight: 700;
+  color: #FB7185;
+}
+
+.low-temp {
+  font-size: 1.25rem;
+  color: #94a3b8;
+}
+
+.crowd-bar-container {
+  margin-top: 1rem;
+}
+
+.crowd-label {
+  font-size: 0.75rem;
+  color: #64748b;
+  margin-bottom: 0.5rem;
+}
+
+.crowd-track {
+  height: 6px;
+  background: #f1f5f9;
+  border-radius: 3px;
+  overflow: hidden;
+}
+
+.crowd-fill {
+  height: 100%;
+  border-radius: 3px;
+}
+.crowd-fill.low { background: #10B981; }
+.crowd-fill.medium { background: #F59E0B; }
+.crowd-fill.high { background: #EF4444; }
