@@ -48,7 +48,7 @@ export const SPOTS = [
     avgVisitDuration: '1-1.5 hours',
     capacity: 3000,
     annualVisitors: 2391460, // 23.91 lakh (2023)
-    image: '/spots/boat-house.webp',
+    image: '/spots/boat-house.jpg',
     fallbackImage: 'https://upload.wikimedia.org/wikipedia/commons/thumb/7/7a/Boat_House_in_Ooty_Lake%2C_Ooty_-_Tamil_Nadu.JPG/1280px-Boat_House_in_Ooty_Lake%2C_Ooty_-_Tamil_Nadu.JPG',
     tags: ['lake', 'family', 'adventure', 'scenic'],
     tips: [
@@ -108,7 +108,7 @@ export const SPOTS = [
     avgVisitDuration: '1 hour',
     capacity: 2000,
     annualVisitors: 1800000,
-    image: '/spots/doddabetta.webp',
+    image: '/spots/doddabetta.jpg',
     fallbackImage: 'https://upload.wikimedia.org/wikipedia/commons/thumb/3/34/Telescope_House_in_Doddabetta_Peak_-_Ooty%2CTamil_Nadu.JPG/1280px-Telescope_House_in_Doddabetta_Peak_-_Ooty%2CTamil_Nadu.JPG',
     tags: ['viewpoint', 'trekking', 'photography', 'nature'],
     tips: [
@@ -168,7 +168,7 @@ export const SPOTS = [
     avgVisitDuration: '45 min-1 hour',
     capacity: 1000,
     annualVisitors: 900000,
-    image: '/spots/tea-factory.webp',
+    image: '/spots/tea-factory.jpg',
     fallbackImage: 'https://upload.wikimedia.org/wikipedia/commons/thumb/3/3b/Tea_Factory_and_Tea_Museum%2C_Othagamandalam%2C_Tamil_Nadu%2C_India.jpg/1280px-Tea_Factory_and_Tea_Museum%2C_Othagamandalam%2C_Tamil_Nadu%2C_India.jpg',
     tags: ['museum', 'culture', 'shopping', 'food'],
     tips: [
