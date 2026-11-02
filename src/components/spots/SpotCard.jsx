@@ -57,8 +57,14 @@ const SpotCard = ({ spot, index = 0 }) => {
       <div className="spot-card-img-wrapper">
         <img 
           src={spot.image}
-          alt={spot.name} 
-          className="spot-card-img" 
+          alt={spot.name}
+          className="spot-card-img"
+          loading="lazy"
+          onError={(e) => {
+            if (spot.fallbackImage && e.currentTarget.src !== spot.fallbackImage) {
+              e.currentTarget.src = spot.fallbackImage;
+            }
+          }}
         />
         <div className="spot-card-gradient" style={{
           position: 'absolute', inset: 0,

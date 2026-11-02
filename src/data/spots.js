@@ -18,6 +18,7 @@ export const SPOTS = [
     capacity: 5000,
     annualVisitors: 2818000, // 28.18 lakh (2023)
     image: '/spots/botanical-garden.webp',
+    fallbackImage: 'https://images.unsplash.com/photo-1585320806297-9794b3e4eeae?auto=format&fit=crop&w=800&q=80',
     tags: ['nature', 'family', 'photography', 'heritage'],
     tips: [
       'Visit early morning (7-9 AM) for fewer crowds and better light',
@@ -48,6 +49,7 @@ export const SPOTS = [
     capacity: 3000,
     annualVisitors: 2391460, // 23.91 lakh (2023)
     image: '/spots/boat-house.webp',
+    fallbackImage: 'https://images.unsplash.com/photo-1584551882802-ca081b505b49?auto=format&fit=crop&w=800&q=80',
     tags: ['lake', 'family', 'adventure', 'scenic'],
     tips: [
       'Weekday afternoons have shortest boat queues',
@@ -77,6 +79,7 @@ export const SPOTS = [
     capacity: 3000,
     annualVisitors: 1200000,
     image: '/spots/rose-garden.webp',
+    fallbackImage: 'https://images.unsplash.com/photo-1559563458-527698bf5295?auto=format&fit=crop&w=800&q=80',
     tags: ['nature', 'photography', 'romantic', 'garden'],
     tips: [
       'Best blooming season is April-June',
@@ -106,6 +109,7 @@ export const SPOTS = [
     capacity: 2000,
     annualVisitors: 1800000,
     image: '/spots/doddabetta.webp',
+    fallbackImage: 'https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?auto=format&fit=crop&w=800&q=80',
     tags: ['viewpoint', 'trekking', 'photography', 'nature'],
     tips: [
       'Best views are early morning (7-9 AM) before clouds roll in',
@@ -135,6 +139,7 @@ export const SPOTS = [
     capacity: 1500,
     annualVisitors: 800000,
     image: '/spots/pykara-falls.webp',
+    fallbackImage: 'https://images.unsplash.com/photo-1508710285745-edc8137d6b5b?auto=format&fit=crop&w=800&q=80',
     tags: ['waterfall', 'nature', 'boating', 'photography'],
     tips: [
       'Best water flow during monsoon (July-Oct) but trails can be slippery',
@@ -164,6 +169,7 @@ export const SPOTS = [
     capacity: 1000,
     annualVisitors: 900000,
     image: '/spots/tea-factory.webp',
+    fallbackImage: 'https://images.unsplash.com/photo-1589182373726-e4f658ab50f0?auto=format&fit=crop&w=800&q=80',
     tags: ['museum', 'culture', 'shopping', 'food'],
     tips: [
       'Free tea tasting is available at the end of the tour',
@@ -193,6 +199,7 @@ export const SPOTS = [
     capacity: 4000,
     annualVisitors: 1500000,
     image: '/spots/ooty-lake.webp',
+    fallbackImage: 'https://images.unsplash.com/photo-1501785888041-af3ef285b470?auto=format&fit=crop&w=800&q=80',
     tags: ['lake', 'free', 'walking', 'scenic', 'family'],
     tips: [
       'Free entry — great budget-friendly option',
@@ -222,6 +229,7 @@ export const SPOTS = [
     capacity: 800,
     annualVisitors: 200000,
     image: '/spots/emerald-lake.webp',
+    fallbackImage: 'https://images.unsplash.com/photo-1621020742748-e465a9147651?auto=format&fit=crop&w=800&q=80',
     tags: ['lake', 'hidden-gem', 'peaceful', 'nature', 'free'],
     tips: [
       '🌿 HIDDEN GEM — Rarely crowded, ideal for nature lovers',
@@ -251,6 +259,7 @@ export const SPOTS = [
     capacity: 500,
     annualVisitors: 400000,
     image: '/spots/thread-garden.webp',
+    fallbackImage: 'https://images.unsplash.com/photo-1566152467605-fd2f144798e5?auto=format&fit=crop&w=800&q=80',
     tags: ['museum', 'art', 'indoor', 'unique'],
     tips: [
       'Indoor attraction — perfect for rainy days',
@@ -280,6 +289,7 @@ export const SPOTS = [
     capacity: 500,
     annualVisitors: 500000,
     image: '/spots/nilgiri-railway.webp',
+    fallbackImage: 'https://images.unsplash.com/photo-1474487548417-781cb71495f3?auto=format&fit=crop&w=800&q=80',
     tags: ['heritage', 'UNESCO', 'scenic', 'train', 'must-do'],
     tips: [
       'Book tickets 2-3 months in advance on IRCTC — they sell out fast',

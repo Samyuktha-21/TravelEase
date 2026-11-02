@@ -8,6 +8,7 @@
 }
 
 .spot-card-img-wrapper {
+  background-color: #1E293B;
   position: relative;
   height: 240px;
   overflow: hidden;

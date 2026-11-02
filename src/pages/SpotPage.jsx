@@ -44,7 +44,12 @@ const SpotPage = () => {
 
   return (
     <div className="spot-page">
-      <div className="spot-hero">
+      <div className="spot-hero" style={spot.image ? {
+        backgroundImage: `linear-gradient(rgba(15, 23, 42, 0.75), rgba(15, 23, 42, 0.9)), url(${spot.image})`,
+        backgroundSize: 'cover',
+        backgroundPosition: 'center',
+        backgroundRepeat: 'no-repeat'
+      } : {}}>
         <div className="spot-hero-content">
           <div className="spot-meta">
             <span className="spot-cat">{spot.category.toUpperCase()}</span>
