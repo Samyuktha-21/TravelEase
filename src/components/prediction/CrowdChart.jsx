@@ -12,15 +12,15 @@ const CrowdChart = ({ spotId }) => {
 
   const labels = hourlyData.map(d => `${d.hour}:00`);
   const dataScores = hourlyData.map(d => d.score);
-  
+
   const backgroundColors = hourlyData.map(d => {
-    if (d.score <= 30) return '#2DD4BF'; // Jungle Mint
-    if (d.score <= 70) return '#F59E0B'; // Amber
-    return '#FB7185'; // Warm Coral
+    if (d.score <= 30) return '#4ADE80'; // Low crowd green
+    if (d.score <= 70) return '#F59E0B'; // Moderate amber
+    return '#D2691E'; // Trailhead signature terracotta surge
   });
 
   const borderColors = hourlyData.map(d => {
-    return d.hour === currentHour ? '#1E293B' : 'transparent';
+    return d.hour === currentHour ? '#EFEDE6' : 'transparent';
   });
 
   const borderThickness = hourlyData.map(d => {
@@ -31,12 +31,13 @@ const CrowdChart = ({ spotId }) => {
     labels,
     datasets: [
       {
-        label: 'Crowd Level (%)',
+        label: 'Crowd Density (%)',
         data: dataScores,
         backgroundColor: backgroundColors,
         borderColor: borderColors,
         borderWidth: borderThickness,
-        borderRadius: 4,
+        borderRadius: 2,
+        barPercentage: 0.75,
       }
     ]
   };
@@ -46,24 +47,22 @@ const CrowdChart = ({ spotId }) => {
     maintainAspectRatio: false,
     plugins: {
       legend: {
-        display: false, // We'll build a custom HTML legend instead
+        display: false,
       },
       tooltip: {
-        backgroundColor: '#1E293B',
-        titleFont: { family: 'Outfit', size: 14 },
-        bodyFont: { family: 'Outfit', size: 14 },
-        padding: 12,
-        cornerRadius: 8,
+        backgroundColor: '#1C1C1C',
+        borderColor: 'rgba(216, 211, 200, 0.25)',
+        borderWidth: 1,
+        titleFont: { family: 'IBM Plex Mono', size: 12 },
+        bodyFont: { family: 'IBM Plex Mono', size: 12 },
+        titleColor: '#EFEDE6',
+        bodyColor: '#A5A59A',
+        padding: 10,
+        cornerRadius: 2,
+        displayColors: false,
         callbacks: {
           label: function(context) {
-            let label = context.dataset.label || '';
-            if (label) {
-              label += ': ';
-            }
-            if (context.parsed.y !== null) {
-              label += context.parsed.y + '%';
-            }
-            return label;
+            return `Density: ${context.parsed.y}%`;
           }
         }
       },
@@ -73,12 +72,13 @@ const CrowdChart = ({ spotId }) => {
         beginAtZero: true,
         max: 100,
         grid: {
-          color: '#f1f5f9',
+          color: 'rgba(216, 211, 200, 0.08)',
           drawBorder: false,
         },
         ticks: {
-          font: { family: 'Outfit' },
-          color: '#94a3b8'
+          font: { family: 'IBM Plex Mono', size: 10 },
+          color: '#A5A59A',
+          callback: (value) => `${value}%`
         }
       },
       x: {
@@ -86,10 +86,8 @@ const CrowdChart = ({ spotId }) => {
           display: false,
         },
         ticks: {
-          font: { family: 'Outfit' },
-          color: '#94a3b8',
-          maxRotation: 45,
-          minRotation: 45
+          font: { family: 'IBM Plex Mono', size: 10 },
+          color: '#A5A59A',
         }
       }
     }
@@ -99,13 +97,19 @@ const CrowdChart = ({ spotId }) => {
     <div className="crowd-chart-wrapper">
       <div className="chart-legend">
         <div className="legend-item">
-          <span className="legend-dot" style={{backgroundColor: '#2DD4BF'}}></span> Low
+          <span className="legend-dot" style={{ backgroundColor: '#4ADE80' }}></span>
+          <span>Low (0–30%)</span>
         </div>
         <div className="legend-item">
-          <span className="legend-dot" style={{backgroundColor: '#F59E0B'}}></span> Moderate
+          <span className="legend-dot" style={{ backgroundColor: '#F59E0B' }}></span>
+          <span>Moderate (31–70%)</span>
         </div>
         <div className="legend-item">
-          <span className="legend-dot" style={{backgroundColor: '#FB7185'}}></span> High
+          <span className="legend-dot" style={{ backgroundColor: '#D2691E' }}></span>
+          <span>Peak Surge (&gt;70%)</span>
+        </div>
+        <div className="legend-item" style={{ marginLeft: 'auto' }}>
+          <span className="current-hour-indicator">CURRENT HOUR</span>
         </div>
       </div>
       <div className="chart-container">

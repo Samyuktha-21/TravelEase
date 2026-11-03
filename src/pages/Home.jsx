@@ -1,9 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
-import { APP_CONFIG } from '../config/app';
-import { SPOTS } from '../data/spots';
 import { getAllSpotsWithCrowd } from '../data/crowdModel';
-import DoodleDecor from '../components/layout/DoodleDecor';
 import SpotCard from '../components/spots/SpotCard';
 import './Home.css';
 
@@ -15,120 +12,521 @@ const Home = () => {
     const crowdSpots = getAllSpotsWithCrowd();
     setSpots(crowdSpots.slice(0, 6));
     const sorted = [...crowdSpots].sort((a, b) => a.crowd.score - b.crowd.score);
-    if (sorted.length > 0) setLeastCrowded(sorted[0]);
+    if (sorted.length > 0) {
+      setLeastCrowded(sorted[0]);
+    }
   }, []);
 
   return (
     <div className="home-page">
-      {/* HERO */}
-      <section className="hero-section">
-        <div className="hero-orb orb-teal"></div>
-        <div className="hero-orb orb-coral"></div>
-        <DoodleDecor variant="hero" />
+      {/* HERO SECTION — TRAILHEAD AESTHETIC */}
+      <section className="hero">
+        <img
+          className="hero-image"
+          src="/hero-ooty.jpg"
+          alt="Rolling Nilgiri tea hills under dramatic misty mountain skies in Ooty"
+          fetchPriority="high"
+        />
+        <div className="hero-shade"></div>
 
         <div className="hero-content">
-          <h1 className="hero-title">Travel<span className="text-gradient">Ease</span></h1>
-          <p className="hero-tagline">{APP_CONFIG.tagline}</p>
-          <p className="hero-subtitle">Real-time crowd predictions for Ooty's top tourist spots. Know before you go.</p>
+          <div className="hero-heading">
+            <p className="eyebrow">
+              <span className="tiny-line"></span> Built for the Nilgiris
+            </p>
+            <h1>
+              Out there.<br />
+              Starts here.
+            </h1>
+            <p className="hero-subtitle">
+              Real-time crowd predictions. Local know-how. Serene Nilgiri trails.
+            </p>
+          </div>
 
-          <div className="hero-search-bar">
-            <svg viewBox="0 0 24 24" width="20" height="20" stroke="currentColor" strokeWidth="2" fill="none" strokeLinecap="round" strokeLinejoin="round"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
-            <input type="text" placeholder="Search spots, viewpoints, gardens..." />
-            <Link to="/explore" className="btn-search">Explore</Link>
+          <div className="hero-bottom">
+            <div className="hero-coordinate">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="16"
+                height="16"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="2"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+              >
+                <path d="M20 10c0 4.993-5.539 10.193-7.399 11.799a1 1 0 0 1-1.202 0C9.539 20.193 4 14.993 4 10a8 8 0 0 1 16 0" />
+                <circle cx="12" cy="10" r="3" />
+              </svg>
+              <span>
+                Rooted in Ooty.<br />
+                <strong>Ready for anywhere.</strong>
+              </span>
+            </div>
+
+            <a href="#how-it-works" className="hero-explore">
+              <span className="outlined-text">
+                Find your<br />
+                calm spots.
+              </span>
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="22"
+                height="22"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="1.5"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+              >
+                <path d="M12 5v14" />
+                <path d="m19 12-7 7-7-7" />
+              </svg>
+            </a>
+
+            <div className="hero-buttons">
+              <Link className="button button-orange" to="/explore">
+                Explore the spots{' '}
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="18"
+                  height="18"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  strokeWidth="2"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                >
+                  <path d="M7 7h10v10" />
+                  <path d="M7 17 17 7" />
+                </svg>
+              </Link>
+              <Link className="button button-outline" to="/crowds">
+                Check Live Crowds{' '}
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="17"
+                  height="17"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  strokeWidth="2"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                >
+                  <path d="M7 7h10v10" />
+                  <path d="M7 17 17 7" />
+                </svg>
+              </Link>
+            </div>
           </div>
         </div>
 
+        <span className="hero-side-note">
+          Nilgiris, Tamil Nadu / 11°24′ N • 76°42′ E
+        </span>
+
+        {/* Floating Live Crowd Indicator */}
         {leastCrowded && (
-          <div className="live-crowd-card glass-card">
-            <div className="live-indicator">
-              <span className="live-pulse-dot"></span>
-              <span>Live Crowd Status</span>
+          <div className="hero-floating-status">
+            <div className="floating-status-header">
+              <span className="live-dot"></span>
+              <span className="floating-title">LIVE CROWD RADAR</span>
             </div>
-            <p className="lc-label">Least crowded right now</p>
-            <h4 className="lc-name">{leastCrowded.shortName || leastCrowded.name}</h4>
-            <p className="lc-score" style={{ color: leastCrowded.crowd?.color }}>
-              {leastCrowded.crowd?.score}% - {leastCrowded.crowd?.label}
-            </p>
-            <Link to="/explore" className="btn btn-primary btn-sm" style={{ marginTop: 12, width: '100%', justifyContent: 'center' }}>View All Spots</Link>
+            <p className="floating-subtitle">LEAST CROWDED RIGHT NOW</p>
+            <h4 className="floating-spot-name">{leastCrowded.shortName || leastCrowded.name}</h4>
+            <div className="floating-score-row">
+              <span className="floating-score" style={{ color: 'var(--crowd-low-glow)' }}>
+                {leastCrowded.crowd?.score}% DENSITY
+              </span>
+              <span className="floating-label">({leastCrowded.crowd?.label?.toUpperCase()})</span>
+            </div>
+            <Link to="/crowds" className="floating-link">
+              Open Live Radar ↗
+            </Link>
           </div>
         )}
-
-        <div className="hero-wave-bottom">
-          <svg viewBox="0 0 1440 120" preserveAspectRatio="none">
-            <path d="M0,60 C360,120 720,0 1080,60 C1260,90 1380,30 1440,60 L1440,120 L0,120 Z" fill="var(--sea-mist)" />
-          </svg>
-        </div>
       </section>
 
-      {/* HOW IT WORKS */}
-      <section className="how-section">
-        <div className="container">
-          <h2 className="section-title">How <span className="text-gradient">TravelEase</span> Works</h2>
-          <p className="section-subtitle">Three simple steps to a crowd-free vacation</p>
-          <div className="steps-grid">
-            <div className="step-card">
-              <div className="step-icon">
-                <svg viewBox="0 0 24 24" width="28" height="28" stroke="currentColor" strokeWidth="2" fill="none" strokeLinecap="round" strokeLinejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><path d="M23 21v-2a4 4 0 0 0-3-3.87"></path><path d="M16 3.13a4 4 0 0 1 0 7.75"></path></svg>
-              </div>
+      {/* SECTION 01: HOW TRAVELEASE WORKS (ACTIVITY LIST) */}
+      <section id="how-it-works" className="section activity-section">
+        <div className="rail">
+          <p className="eyebrow accent">01 / Choose your pace</p>
+          <div className="section-heading">
+            <h2>
+              Good plans.<br />
+              No guesswork.
+            </h2>
+            <p>
+              A misty switchback. A quiet tea trail. An open lake.<br />
+              TravelEase predicts crowd surges so you experience Ooty at peace.
+            </p>
+          </div>
+
+          <div className="activity-list">
+            <Link className="activity-row" to="/crowds">
+              <span className="row-index">01</span>
               <h3>Check Crowds</h3>
-              <p>See real-time crowd predictions for every tourist spot, powered by historical data and weather patterns.</p>
-              <span className="step-number">01</span>
-            </div>
-            <div className="step-card">
-              <div className="step-icon">
-                <svg viewBox="0 0 24 24" width="28" height="28" stroke="currentColor" strokeWidth="2" fill="none" strokeLinecap="round" strokeLinejoin="round"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg>
-              </div>
-              <h3>Pick Smart</h3>
-              <p>Get alternative suggestions for less-crowded spots. Our model recommends the best time windows to visit.</p>
-              <span className="step-number">02</span>
-            </div>
-            <div className="step-card">
-              <div className="step-icon">
-                <svg viewBox="0 0 24 24" width="28" height="28" stroke="currentColor" strokeWidth="2" fill="none" strokeLinecap="round" strokeLinejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg>
-              </div>
-              <h3>Explore Happy</h3>
-              <p>Skip the queues, discover hidden gems, and enjoy Ooty like a local - not a tourist caught in traffic.</p>
-              <span className="step-number">03</span>
-            </div>
+              <span className="activity-note">Hourly Radar</span>
+              <span className="activity-equipment">Historical Trends · Weather Shifts</span>
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="28"
+                height="28"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="1.2"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+              >
+                <path d="M7 7h10v10" />
+                <path d="M7 17 17 7" />
+              </svg>
+            </Link>
+
+            <Link className="activity-row" to="/crowds">
+              <span className="row-index">02</span>
+              <h3>Pick Smart Hours</h3>
+              <span className="activity-note">Optimal Windows</span>
+              <span className="activity-equipment">Early Mornings · Golden Hours</span>
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="28"
+                height="28"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="1.2"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+              >
+                <path d="M7 7h10v10" />
+                <path d="M7 17 17 7" />
+              </svg>
+            </Link>
+
+            <Link className="activity-row" to="/explore">
+              <span className="row-index">03</span>
+              <h3>Explore Quiet Paths</h3>
+              <span className="activity-note">Smart Reroutes</span>
+              <span className="activity-equipment">Emerald Lake · Pykara Falls</span>
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="28"
+                height="28"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="1.2"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+              >
+                <path d="M7 7h10v10" />
+                <path d="M7 17 17 7" />
+              </svg>
+            </Link>
+          </div>
+
+          <div className="activity-footnote">
+            <span className="eyebrow muted">Different paths. The same peace.</span>
+            <Link className="text-link" to="/explore">
+              Explore all spots{' '}
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="16"
+                height="16"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="2"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+              >
+                <path d="M7 7h10v10" />
+                <path d="M7 17 17 7" />
+              </svg>
+            </Link>
           </div>
         </div>
       </section>
 
-      {/* FAMOUS SPOTS */}
-      <section className="spots-section">
-        <div className="container">
-          <div className="section-header-row">
-            <div>
-              <h2 className="section-title">Popular Destinations</h2>
-              <p className="section-subtitle">Crowd predictions updated hourly</p>
-            </div>
-            <Link to="/explore" className="btn btn-outline">View All Spots</Link>
+      {/* SECTION 02: FEATURED DESTINATIONS (PRODUCT GRID) */}
+      <section className="section featured-section">
+        <div className="rail">
+          <p className="eyebrow accent">02 / Popular destinations</p>
+          <div className="section-heading">
+            <h2>Ooty at a glance.</h2>
+            <Link className="text-link" to="/explore">
+              View all 10 spots{' '}
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="17"
+                height="17"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="2"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+              >
+                <path d="M7 7h10v10" />
+                <path d="M7 17 17 7" />
+              </svg>
+            </Link>
           </div>
-          <div className="spots-grid">
+          <p className="section-intro">
+            Dynamic crowd predictions updated for Ooty's most famous botanical gardens, misty peaks, and serene lakes.
+          </p>
+
+          <div className="product-grid">
             {spots.map((spot, i) => (
               <SpotCard key={spot.id} spot={spot} index={i} />
             ))}
           </div>
+
+          {/* Service Strip */}
+          <div className="service-strip">
+            <span>
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="18"
+                height="18"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="1.5"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+              >
+                <path d="m8 3 4 8 5-5 5 15H2L8 3z" />
+              </svg>{' '}
+              2,240m Elevation
+            </span>
+            <span>
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="18"
+                height="18"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="1.5"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+              >
+                <circle cx="12" cy="12" r="5" />
+                <path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42" />
+              </svg>{' '}
+              12–25°C Pleasant Climate
+            </span>
+            <span>
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="18"
+                height="18"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="1.5"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+              >
+                <path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2" />
+                <circle cx="9" cy="7" r="4" />
+                <path d="M22 21v-2a4 4 0 0 0-3-3.87" />
+                <path d="M16 3.13a4 4 0 0 1 0 7.75" />
+              </svg>{' '}
+              28+ Lakh Annual Travelers
+            </span>
+            <Link to="/transport">
+              Transit & toy train guide{' '}
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="14"
+                height="14"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="2"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+              >
+                <path d="M7 7h10v10" />
+                <path d="M7 17 17 7" />
+              </svg>
+            </Link>
+          </div>
         </div>
       </section>
 
-      {/* STATS */}
-      <section className="stats-section">
-        <div className="container">
-          <div className="stats-grid">
-            {[
-              { icon: <svg viewBox="0 0 24 24" width="24" height="24" stroke="currentColor" strokeWidth="2" fill="none"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"></polyline></svg>, value: '2,240m', label: 'Elevation' },
-              { icon: <svg viewBox="0 0 24 24" width="24" height="24" stroke="currentColor" strokeWidth="2" fill="none"><circle cx="12" cy="12" r="5"></circle><line x1="12" y1="1" x2="12" y2="3"></line><line x1="12" y1="21" x2="12" y2="23"></line><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line><line x1="1" y1="12" x2="3" y2="12"></line><line x1="21" y1="12" x2="23" y2="12"></line><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line></svg>, value: '12-25 C', label: 'Temperature Range' },
-              { icon: <svg viewBox="0 0 24 24" width="24" height="24" stroke="currentColor" strokeWidth="2" fill="none"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><path d="M23 21v-2a4 4 0 0 0-3-3.87"></path><path d="M16 3.13a4 4 0 0 1 0 7.75"></path></svg>, value: '28+ Lakh', label: 'Annual Visitors (GBG)' },
-              { icon: <svg viewBox="0 0 24 24" width="24" height="24" stroke="currentColor" strokeWidth="2" fill="none"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg>, value: '10', label: 'Spots Tracked' },
-            ].map((stat, i) => (
-              <div key={i} className="stat-card">
-                <div className="stat-icon">{stat.icon}</div>
-                <h3 className="stat-value">{stat.value}</h3>
-                <p className="stat-label">{stat.label}</p>
-              </div>
-            ))}
+      {/* SECTION 03: FIELD EXPERIENCE & PHILOSOPHY */}
+      <section className="section experience-section">
+        <div className="rail">
+          <p className="eyebrow accent">03 / A tranquil escape</p>
+          <h2>
+            Not stuck in traffic.<br />
+            Inspired by the hills.
+          </h2>
+
+          <div className="experience-copy">
+            <p>
+              We built TravelEase for early risers, tea plantation wanderers, and mountain travelers. By computing live visitor influx, holiday schedules, and microclimate rain metrics, we replace guesswork with calmness.
+            </p>
+            <p className="eyebrow muted">
+              Eucalyptus-scented air.<br />
+              Dew on Nilgiri tea leaves.<br />
+              A holiday worth remembering.
+            </p>
           </div>
+
+          <figure className="field-image">
+            <img
+              src="/spots/doddabetta.jpg"
+              alt="Panoramic view from Doddabetta peak over the Nilgiri mountain ridges"
+              loading="lazy"
+            />
+            <span className="image-marker">TE / FIELD NOTES — 2,637M</span>
+            <figcaption className="eyebrow muted">
+              Doddabetta Peak. Highest vantage point in South India.
+            </figcaption>
+          </figure>
+
+          <div className="brand-band">
+            <span className="eyebrow muted">Trusted Data Feeds</span>
+            <span className="brand-meta">Nilgiri Tourism Board</span>
+            <span className="brand-meta">UNESCO Mountain Railway</span>
+            <span className="brand-meta">Indian Meteorological Dept</span>
+            <span className="brand-meta">Local Transit Hubs</span>
+          </div>
+        </div>
+      </section>
+
+      {/* SECTION 04: FIELD GUIDES (KNOW BEFORE YOU GO) */}
+      <section className="section guides-section">
+        <div className="rail">
+          <p className="eyebrow accent">04 / Know before you go</p>
+          <div className="section-heading">
+            <h2>
+              A little know-how<br />
+              goes a long way.
+            </h2>
+            <Link className="text-link" to="/transport">
+              All field guides{' '}
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="17"
+                height="17"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="2"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+              >
+                <path d="M7 7h10v10" />
+                <path d="M7 17 17 7" />
+              </svg>
+            </Link>
+          </div>
+
+          <div className="guide-list">
+            <Link className="guide-row" to="/transport">
+              <span className="eyebrow muted">Transit / 5 min read</span>
+              <div>
+                <h3>Nilgiri Mountain Railway (Toy Train) Guide</h3>
+                <p>
+                  How to book the UNESCO steam train from Mettupalayam, tunnel highlights, and morning seat tips.
+                </p>
+              </div>
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="26"
+                height="26"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="1.4"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+              >
+                <path d="M7 7h10v10" />
+                <path d="M7 17 17 7" />
+              </svg>
+            </Link>
+
+            <Link className="guide-row" to="/weather">
+              <span className="eyebrow muted">Climate / 4 min read</span>
+              <div>
+                <h3>Monsoon & Winter Layering in Ooty</h3>
+                <p>
+                  Pack smart for swift temperature drops, afternoon mountain mist, and sudden valley showers.
+                </p>
+              </div>
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="26"
+                height="26"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="1.4"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+              >
+                <path d="M7 7h10v10" />
+                <path d="M7 17 17 7" />
+              </svg>
+            </Link>
+
+            <Link className="guide-row" to="/explore">
+              <span className="eyebrow muted">Routing / 6 min read</span>
+              <div>
+                <h3>Doddabetta vs. Emerald Lake: When to Reroute</h3>
+                <p>
+                  Why swapping crowded noon spots for pristine lakeside trails gives you a 10x better trip.
+                </p>
+              </div>
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="26"
+                height="26"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="1.4"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+              >
+                <path d="M7 7h10v10" />
+                <path d="M7 17 17 7" />
+              </svg>
+            </Link>
+          </div>
+
+          <Link className="fit-link" to="/explore">
+            <span>Find low-crowd destinations right now.</span>
+            <span className="text-link">
+              Explore live catalog{' '}
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="17"
+                height="17"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="2"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+              >
+                <path d="M7 7h10v10" />
+                <path d="M7 17 17 7" />
+              </svg>
+            </span>
+          </Link>
         </div>
       </section>
     </div>

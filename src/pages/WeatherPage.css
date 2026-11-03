@@ -1,160 +1,281 @@
+/* TRAILHEAD WEATHER PAGE */
 .weather-page {
-  font-family: 'Outfit', sans-serif;
-  background-color: #F0FDFA;
-  color: var(--volcanic-ash);
-  min-height: 100vh;
-  padding-bottom: 5rem;
+  padding-top: 140px;
+  padding-bottom: 90px;
+  background: var(--ink);
+  color: var(--paper);
 }
 
-.weather-hero {
-  background-color: #1E293B;
-  color: white;
-  padding: 6rem 2rem 4rem;
-  text-align: center;
+.weather-heading {
+  font-size: clamp(48px, 6.5vw, 84px);
+  line-height: 0.95;
+  letter-spacing: -0.025em;
+  margin-top: 14px;
 }
 
-.weather-title {
-  font-family: 'Playfair Display', serif;
-  font-size: 3rem;
-  margin-bottom: 1rem;
+/* Current Station Card */
+.weather-current-station {
+  margin-top: 40px;
+  background: var(--pine);
+  border: 1px solid var(--line);
+  padding: 36px;
 }
 
-.weather-subtitle {
-  color: #cbd5e1;
-  font-size: 1.125rem;
-}
-
-.weather-content {
-  max-width: 1200px;
-  margin: -2rem auto 0;
-  padding: 0 2rem;
-  position: relative;
-  z-index: 10;
-}
-
-.weather-stats-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-  gap: 1.5rem;
-  margin-bottom: 4rem;
-}
-
-.weather-stat-card {
-  background: white;
-  border-radius: 16px;
-  padding: 1.5rem;
+.station-header {
   display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 20px;
+  border-bottom: 1px solid var(--line);
+  padding-bottom: 24px;
+}
+
+.station-header h2 {
+  font-size: clamp(32px, 4vw, 48px);
+  margin-top: 6px;
+}
+
+.station-season-badge {
+  border: 1px solid var(--orange);
+  background: rgba(210, 105, 30, 0.15);
+  color: var(--orange);
+  padding: 6px 14px;
+  font: 500 10px/1.4 var(--mono);
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  border-radius: var(--radius-xs);
+}
+
+.station-main-row {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: 60px;
   align-items: center;
-  gap: 1.5rem;
-  box-shadow: 0 4px 20px rgba(0,0,0,0.05);
+  padding: 32px 0;
+  border-bottom: 1px solid var(--line);
 }
 
-.weather-stat-card svg {
-  color: #2DD4BF;
+.station-temp-display {
+  display: flex;
+  align-items: baseline;
+  gap: 10px;
+  font-family: var(--display);
 }
 
-.weather-stat-card h3 {
-  font-size: 0.875rem;
-  color: #64748b;
-  margin: 0 0 0.25rem;
+.station-high {
+  font-size: clamp(64px, 8vw, 96px);
+  font-weight: 800;
+  color: var(--paper);
+  line-height: 1;
 }
 
-.weather-stat-card p {
-  font-size: 1.25rem;
+.station-sep {
+  font-size: 40px;
+  color: var(--quiet);
+}
+
+.station-low {
+  font-size: 40px;
   font-weight: 600;
-  color: #1E293B;
-  margin: 0;
+  color: var(--quiet);
 }
 
-.section-heading {
-  font-family: 'Playfair Display', serif;
-  font-size: 2rem;
-  color: #1E293B;
-  margin-bottom: 2rem;
+.station-metrics-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 20px;
+}
+
+.station-metric {
+  background: rgba(28, 28, 28, 0.4);
+  border: 1px solid var(--line);
+  padding: 16px;
+  border-radius: var(--radius-xs);
+}
+
+.station-metric h4 {
+  font-family: var(--mono);
+  font-size: 20px;
+  margin-top: 8px;
+  color: var(--paper);
+}
+
+.station-description {
+  margin-top: 24px;
+  font-size: 15px;
+  line-height: 1.7;
+  color: #B9BCB1;
+  max-width: 780px;
+}
+
+/* 7-Day Forecast Grid */
+.forecast-section {
+  margin-top: 70px;
+}
+
+.forecast-grid {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 12px;
+}
+
+.forecast-day-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
   text-align: center;
+  padding: 20px 12px;
+  background: var(--pine);
+}
+
+.forecast-day-label {
+  font-family: var(--mono);
+  font-size: 10px;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--stone);
+}
+
+.forecast-icon {
+  font-size: 28px;
+  margin: 12px 0 8px;
+}
+
+.forecast-temps {
+  display: flex;
+  gap: 6px;
+  font-family: var(--mono);
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.f-high {
+  color: var(--paper);
+}
+
+.f-low {
+  color: var(--quiet);
+}
+
+.forecast-cond {
+  font-family: var(--mono);
+  font-size: 8px;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--quiet);
+  margin-top: 8px;
+}
+
+/* Months Grid */
+.annual-guide-section {
+  margin-top: 70px;
 }
 
 .months-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
-  gap: 1.5rem;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
 }
 
 .month-card {
-  background: white;
-  border-radius: 16px;
-  padding: 1.5rem;
-  box-shadow: 0 4px 20px rgba(0,0,0,0.05);
-  transition: transform 0.2s;
+  background: var(--pine);
+  border: 1px solid var(--line);
+  padding: 22px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
 }
 
-.month-card:hover {
-  transform: translateY(-5px);
+.month-card.active-month {
+  border-color: var(--orange);
+  background: #252e23;
 }
 
-.month-header {
+.month-card-header {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-bottom: 1.5rem;
 }
 
-.month-header h3 {
-  margin: 0;
-  font-size: 1.25rem;
-  color: #1E293B;
+.month-card-header h4 {
+  font-size: 24px;
 }
 
-.season-tag {
-  font-size: 0.75rem;
-  padding: 0.25rem 0.5rem;
-  border-radius: 4px;
-  font-weight: 600;
+.month-season-tag {
+  font-family: var(--mono);
+  font-size: 8px;
   text-transform: uppercase;
+  letter-spacing: 0.12em;
+  color: var(--orange);
+  border: 1px solid rgba(210, 105, 30, 0.4);
+  padding: 3px 8px;
+  border-radius: var(--radius-xs);
 }
-.season-tag.summer { background: #fffbeb; color: #d97706; }
-.season-tag.monsoon { background: #f0f9ff; color: #0369a1; }
-.season-tag.winter { background: #f8fafc; color: #475569; }
 
-.temp-display {
+.month-temp-range {
   display: flex;
   align-items: baseline;
-  gap: 0.5rem;
-  margin-bottom: 1.5rem;
+  gap: 6px;
+  margin: 14px 0 10px;
+  font-family: var(--mono);
 }
 
-.high-temp {
-  font-size: 2rem;
-  font-weight: 700;
-  color: #FB7185;
+.m-high {
+  font-size: 22px;
+  font-weight: 600;
+  color: var(--paper);
 }
 
-.low-temp {
-  font-size: 1.25rem;
-  color: #94a3b8;
+.m-sep {
+  color: var(--quiet);
 }
 
-.crowd-bar-container {
-  margin-top: 1rem;
+.m-low {
+  font-size: 16px;
+  color: var(--quiet);
 }
 
-.crowd-label {
-  font-size: 0.75rem;
-  color: #64748b;
-  margin-bottom: 0.5rem;
+.month-data-points {
+  display: flex;
+  gap: 12px;
+  font-family: var(--mono);
+  font-size: 9px;
+  color: var(--quiet);
+  text-transform: uppercase;
+  margin-bottom: 12px;
 }
 
-.crowd-track {
-  height: 6px;
-  background: #f1f5f9;
-  border-radius: 3px;
-  overflow: hidden;
+.month-desc {
+  font-size: 13px;
+  line-height: 1.6;
+  color: #A5A59A;
 }
 
-.crowd-fill {
-  height: 100%;
-  border-radius: 3px;
+@media (max-width: 1024px) {
+  .forecast-grid {
+    grid-template-columns: repeat(4, 1fr);
+  }
+
+  .months-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .station-main-row {
+    grid-template-columns: 1fr;
+    gap: 30px;
+  }
 }
-.crowd-fill.low { background: #10B981; }
-.crowd-fill.medium { background: #F59E0B; }
-.crowd-fill.high { background: #EF4444; }
+
+@media (max-width: 768px) {
+  .station-metrics-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .forecast-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .months-grid {
+    grid-template-columns: 1fr;
+  }
+}

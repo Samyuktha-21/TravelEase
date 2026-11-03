@@ -3,140 +3,218 @@ import { useParams, Link } from 'react-router-dom';
 import { getSpotById } from '../data/spots';
 import { getCrowdScore, getAlternatives, getBestTimeToVisit } from '../data/crowdModel';
 import CrowdChart from '../components/prediction/CrowdChart';
+import CrowdBadge from '../components/spots/CrowdBadge';
 import './SpotPage.css';
-
-// Using inline fallback if CrowdBadge is not found, or ideally importing it
-const CrowdBadge = ({ score }) => {
-  let colorClass = 'green';
-  let label = 'Low Crowd';
-  if (score > 30) { colorClass = 'amber'; label = 'Moderate'; }
-  if (score > 70) { colorClass = 'red'; label = 'High Crowd'; }
-  
-  return (
-    <span className={`crowd-badge badge-${colorClass}`}>
-      {label} ({score}%)
-    </span>
-  );
-};
 
 const SpotPage = () => {
   const { spotId } = useParams();
-  const id = spotId; // alias for the rest of the code
   const [spot, setSpot] = useState(null);
   const [crowdData, setCrowdData] = useState(null);
   const [alternatives, setAlternatives] = useState([]);
-  const [bestTime, setBestTime] = useState('');
+  const [bestTime, setBestTime] = useState(null);
 
   useEffect(() => {
-    const s = getSpotById(id);
+    window.scrollTo(0, 0);
+    const s = getSpotById(spotId);
     if (s) {
       setSpot(s);
-      const crowdResult = getCrowdScore(id);
+      const crowdResult = getCrowdScore(spotId);
       setCrowdData(crowdResult);
-      setAlternatives(getAlternatives(id));
-      setBestTime(getBestTimeToVisit(id));
+      setAlternatives(getAlternatives(spotId));
+      setBestTime(getBestTimeToVisit(spotId));
     }
-  }, [id]);
+  }, [spotId]);
 
   if (!spot) {
-    return <div className="spot-not-found">Spot not found.</div>;
+    return (
+      <div className="page-section">
+        <div className="rail">
+          <div className="empty-state">
+            <h2>Destination Not Found</h2>
+            <p>The requested Nilgiri tourist spot does not exist in our catalog.</p>
+            <Link to="/explore" className="button button-orange">Back to Catalog</Link>
+          </div>
+        </div>
+      </div>
+    );
   }
 
   return (
     <div className="spot-page">
-      <div className="spot-hero" style={spot.image ? {
-        backgroundImage: `linear-gradient(rgba(15, 23, 42, 0.75), rgba(15, 23, 42, 0.9)), url(${spot.image})`,
-        backgroundSize: 'cover',
-        backgroundPosition: 'center',
-        backgroundRepeat: 'no-repeat'
-      } : {}}>
-        <div className="spot-hero-content">
-          <div className="spot-meta">
-            <span className="spot-cat">{spot.category.toUpperCase()}</span>
-            {crowdData && <CrowdBadge score={crowdData.score} />}
-          </div>
-          <h1 className="spot-title">{spot.name}</h1>
-          <p className="spot-desc">{spot.description}</p>
-        </div>
-      </div>
+      {/* HERO SCENIC BANNER */}
+      <section className="spot-hero-banner">
+        <img
+          src={spot.image}
+          alt={spot.name}
+          className="spot-banner-image"
+          onError={(e) => {
+            if (spot.fallbackImage && e.currentTarget.src !== spot.fallbackImage) {
+              e.currentTarget.src = spot.fallbackImage;
+            }
+          }}
+        />
+        <div className="spot-banner-shade"></div>
 
-      <div className="spot-layout">
-        <div className="spot-main">
-          
+        <div className="rail spot-banner-content">
+          <Link to="/explore" className="back-link text-link">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="16"
+              height="16"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth="2"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+            >
+              <line x1="19" y1="12" x2="5" y2="12" />
+              <polyline points="12 19 5 12 12 5" />
+            </svg>
+            Back to all destinations
+          </Link>
+
+          <div className="spot-banner-meta">
+            <span className="eyebrow accent">{spot.category} // 2,240M ELEVATION</span>
+            {crowdData && <CrowdBadge level={crowdData.level} score={crowdData.score} />}
+          </div>
+
+          <h1 className="spot-banner-title">{spot.name}</h1>
+          <p className="spot-banner-desc">{spot.description}</p>
+        </div>
+      </section>
+
+      {/* TWO-COLUMN EDITORIAL DETAILS */}
+      <div className="rail spot-layout">
+        <main className="spot-main">
+          {/* TECHNICAL QUICK INFO MATRIX */}
           <div className="quick-info-grid">
             <div className="info-card">
-              <svg viewBox="0 0 24 24" width="24" height="24" stroke="currentColor" strokeWidth="2" fill="none"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
-              <div>
-                <h4>Duration</h4>
-                <p>{spot.avgVisitDuration}</p>
-              </div>
+              <span className="eyebrow muted">Duration</span>
+              <h4>{spot.avgVisitDuration}</h4>
+              <p>Recommended visit pace</p>
             </div>
+
             <div className="info-card">
-              <svg viewBox="0 0 24 24" width="24" height="24" stroke="currentColor" strokeWidth="2" fill="none"><line x1="12" y1="1" x2="12" y2="23"></line><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"></path></svg>
-              <div>
-                <h4>Entry Fee</h4>
-                <p>{spot.entryFee.indian === 0 ? 'Free' : `₹${spot.entryFee.indian}`}</p>
-              </div>
+              <span className="eyebrow muted">Entry Fee</span>
+              <h4>{spot.entryFee?.indian === 0 ? 'Free Entry' : `₹${spot.entryFee?.indian}`}</h4>
+              <p>Per Indian citizen</p>
             </div>
+
             <div className="info-card">
-              <svg viewBox="0 0 24 24" width="24" height="24" stroke="currentColor" strokeWidth="2" fill="none"><path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"></path></svg>
-              <div>
-                <h4>Timings</h4>
-                <p>{spot.timings.open} - {spot.timings.close}</p>
-              </div>
+              <span className="eyebrow muted">Gate Timings</span>
+              <h4>{spot.timings?.open} – {spot.timings?.close}</h4>
+              <p>Daily operating hours</p>
             </div>
+
             <div className="info-card">
-              <svg viewBox="0 0 24 24" width="24" height="24" stroke="currentColor" strokeWidth="2" fill="none"><circle cx="12" cy="12" r="5"></circle><line x1="12" y1="1" x2="12" y2="3"></line><line x1="12" y1="21" x2="12" y2="23"></line><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line><line x1="1" y1="12" x2="3" y2="12"></line><line x1="21" y1="12" x2="23" y2="12"></line><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line></svg>
-              <div>
-                <h4>Best Time</h4>
-                <p>{bestTime ? bestTime.timeLabel : 'N/A'}</p>
-              </div>
+              <span className="eyebrow muted">Optimal Window</span>
+              <h4>{bestTime ? bestTime.timeLabel : 'Early Morning'}</h4>
+              <p>Lowest expected density</p>
             </div>
           </div>
 
-          <div className="chart-section glass-container">
-            <h3>Hourly Crowd Prediction</h3>
+          {/* HOURLY CROWD RADAR CHART */}
+          <div className="chart-section tech-card">
+            <div className="section-heading" style={{ marginTop: 0, marginBottom: 18 }}>
+              <div>
+                <p className="eyebrow accent">01 // Hourly Radar</p>
+                <h3 style={{ fontSize: 32, marginTop: 6 }}>Visitor Influx Prediction</h3>
+              </div>
+              <span className="tag">Dynamic Feed</span>
+            </div>
+            <p className="chart-explanation">
+              Real-time projection based on time-of-day multipliers, weekend influx constants, and seasonal Nilgiri traffic patterns.
+            </p>
             <CrowdChart spotId={spot.id} />
           </div>
 
-          <div className="tips-section">
-            <h3>Visitor Tips</h3>
+          {/* FIELD NOTES / TIPS */}
+          <div className="tips-section tech-card">
+            <div className="section-heading" style={{ marginTop: 0, marginBottom: 16 }}>
+              <div>
+                <p className="eyebrow accent">02 // Field Dispatch</p>
+                <h3 style={{ fontSize: 32, marginTop: 6 }}>Local Know-How</h3>
+              </div>
+              <span className="image-marker-inline">TE / Notes</span>
+            </div>
             <ul className="tips-list">
-              <li>Plan your visit early morning to avoid rush.</li>
-              <li>Carry a light jacket as weather can change.</li>
-              <li>Book entry tickets online if available.</li>
+              <li>
+                <strong>Early Departure:</strong> Reach by {spot.timings?.open || '9:00 AM'} to beat the tourist bus arrivals and enjoy pristine mountain morning mist.
+              </li>
+              <li>
+                <strong>Weather Vigilance:</strong> High-altitude wind gusts and sudden cloud drops occur past 2:00 PM; keep a light jacket and rain cover handy.
+              </li>
+              <li>
+                <strong>Local Parking:</strong> Parking slots fill up rapidly on weekends between 11:30 AM and 3:30 PM. Utilize local transit when possible.
+              </li>
             </ul>
           </div>
-          
-        </div>
+        </main>
 
-        <div className="spot-sidebar">
-          <div className="sidebar-card">
-            <h3>Tags</h3>
+        {/* SIDEBAR */}
+        <aside className="spot-sidebar">
+          {/* Coordinates & Category Box */}
+          <div className="sidebar-card tech-card">
+            <span className="eyebrow muted">Destination Meta</span>
+            <div className="meta-pair-list">
+              <div className="meta-pair">
+                <span>Location</span>
+                <strong>Ooty, Nilgiris</strong>
+              </div>
+              <div className="meta-pair">
+                <span>Category</span>
+                <strong>{spot.category?.toUpperCase()}</strong>
+              </div>
+              <div className="meta-pair">
+                <span>Foreign Entry</span>
+                <strong>{spot.entryFee?.foreigner ? `₹${spot.entryFee.foreigner}` : 'Standard'}</strong>
+              </div>
+            </div>
+
             <div className="tags-container">
               {spot.tags && spot.tags.map(t => (
-                <span key={t} className="tag-pill">{t}</span>
+                <span key={t} className="tag">{t}</span>
               ))}
             </div>
           </div>
 
+          {/* Less Crowded Alternatives */}
           {alternatives.length > 0 && (
-            <div className="sidebar-card alternatives-card">
-              <h3>Less Crowded Alternatives</h3>
+            <div className="sidebar-card tech-card alternatives-box">
+              <span className="eyebrow accent">Calmer Options</span>
+              <h3 style={{ fontSize: 24, marginTop: 6, marginBottom: 14 }}>Reroute & Escape</h3>
+              <p className="alt-intro">
+                When {spot.shortName || spot.name} experiences heavy influx, these nearby spots offer serene vistas with fewer crowds:
+              </p>
+
               <div className="alt-list">
                 {alternatives.map(alt => (
                   <Link key={alt.id} to={`/spot/${alt.id}`} className="alt-item">
-                    <div className="alt-info">
+                    <div>
                       <h4>{alt.name}</h4>
-                      <CrowdBadge score={alt.crowd.score} />
+                      <span className="alt-score">{alt.crowd?.score}% Crowd • {alt.crowd?.label}</span>
                     </div>
-                    <svg viewBox="0 0 24 24" width="16" height="16" stroke="currentColor" strokeWidth="2" fill="none"><polyline points="9 18 15 12 9 6"></polyline></svg>
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      width="18"
+                      height="18"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      strokeWidth="2"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                    >
+                      <path d="M7 7h10v10" />
+                      <path d="M7 17 17 7" />
+                    </svg>
                   </Link>
                 ))}
               </div>
             </div>
           )}
-        </div>
+        </aside>
       </div>
     </div>
   );

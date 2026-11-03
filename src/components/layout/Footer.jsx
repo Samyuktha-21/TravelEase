@@ -1,65 +1,129 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
-import { APP_CONFIG } from '../../config/app';
 import './Footer.css';
 
 const Footer = () => {
+  const [email, setEmail] = useState('');
+  const [subscribed, setSubscribed] = useState(false);
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    if (email) {
+      setSubscribed(true);
+      setEmail('');
+    }
+  };
+
   return (
-    <footer className="premium-footer">
-      <div className="footer-wave">
-        <svg viewBox="0 0 1440 120" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <path d="M0 120L48 105C96 90 192 60 288 45C384 30 480 30 576 40C672 50 768 70 864 75C960 80 1056 70 1152 55C1248 40 1344 20 1392 10L1440 0V120H1392C1344 120 1248 120 1152 120C1056 120 960 120 864 120C768 120 672 120 576 120C480 120 384 120 288 120C192 120 96 120 48 120H0Z" fill="currentColor"/>
-        </svg>
-      </div>
-      
-      <div className="container footer-container">
-        <div className="footer-grid">
-          <div className="footer-brand">
-            <Link to="/" className="footer-logo">
-              <svg className="logo-icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <path d="M4 18L12 5L20 18H4Z" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-                <path d="M12 11L16 18" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-              </svg>
-              <span className="logo-text">TravelEase</span>
-            </Link>
-            <p className="footer-desc">
-              Your intelligent companion for crowd-free travel experiences. Discover the world's most beautiful spots with real-time insights.
+    <footer className="site-footer">
+      <div className="rail">
+        {/* Trail Mail / Crowd Alerts Newsletter */}
+        <div className="newsletter">
+          <div>
+            <p className="eyebrow accent">00 // Real-time Nilgiri Field Dispatch</p>
+            <h2>Stay ahead of the surge.</h2>
+            <p>
+              Crowd surge advisories, morning mist updates, and hidden Nilgiri view trails. Know before you pack.
             </p>
           </div>
 
-          <div className="footer-links-group">
-            <h4 className="footer-title">Navigation</h4>
-            <ul className="footer-list">
-              <li><Link to="/">Home</Link></li>
-              <li><Link to="/explore">Explore Spots</Link></li>
-              <li><Link to="/weather">Weather Forecast</Link></li>
-              <li><Link to="/transport">How to Reach</Link></li>
-            </ul>
-          </div>
-
-          <div className="footer-links-group">
-            <h4 className="footer-title">Data Sources</h4>
-            <ul className="footer-list">
-              <li><a href="#" target="_blank" rel="noreferrer">Local Tourism Board</a></li>
-              <li><a href="#" target="_blank" rel="noreferrer">Live Traffic APIs</a></li>
-              <li><a href="#" target="_blank" rel="noreferrer">Weather Data</a></li>
-              <li><a href="#" target="_blank" rel="noreferrer">Community Reports</a></li>
-            </ul>
-          </div>
-
-          <div className="footer-links-group">
-            <h4 className="footer-title">Connect</h4>
-            <ul className="footer-list">
-              <li><a href="#">Support</a></li>
-              <li><a href="#">Privacy Policy</a></li>
-              <li><a href="#">Terms of Service</a></li>
-              <li><a href="#">Contact Us</a></li>
-            </ul>
+          <div>
+            {subscribed ? (
+              <div className="newsletter-success">
+                <span className="live-dot"></span>
+                <span>You're subscribed to Ooty crowd advisories. Happy exploring!</span>
+              </div>
+            ) : (
+              <form onSubmit={handleSubmit}>
+                <div className="newsletter-input">
+                  <input
+                    type="email"
+                    required
+                    placeholder="Enter your email for crowd alerts"
+                    value={email}
+                    onChange={(e) => setEmail(e.target.value)}
+                  />
+                  <button type="submit" aria-label="Subscribe to trail alerts">
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      width="20"
+                      height="20"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      strokeWidth="2"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                    >
+                      <path d="M5 12h14" />
+                      <path d="m12 5 7 7-7 7" />
+                    </svg>
+                  </button>
+                </div>
+                <label className="checkbox-label">
+                  <input type="checkbox" required defaultChecked />
+                  <span>Receive hourly peak alerts & climate updates. No spam, ever.</span>
+                </label>
+              </form>
+            )}
           </div>
         </div>
 
+        {/* 3-Column Footer Matrix */}
+        <div className="footer-columns">
+          <div>
+            <Link to="/" className="brand" aria-label="TravelEase Home">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="28"
+                height="28"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="1.6"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+              >
+                <path d="m8 3 4 8 5-5 5 15H2L8 3z" />
+              </svg>
+              <span>
+                TRAVELEASE
+                <small>SMART TOURISM / OOTY</small>
+              </span>
+            </Link>
+            <p>
+              Real data. Local know-how.<br />
+              Intelligent predictive travel across the Nilgiris.
+            </p>
+          </div>
+
+          <div>
+            <h3>Explore Ooty</h3>
+            <Link to="/explore">All 10 Monitored Spots</Link>
+            <Link to="/explore">Live Crowd Density</Link>
+            <Link to="/weather">Weather & Climate Guide</Link>
+            <Link to="/transport">Transit & Toy Train</Link>
+          </div>
+
+          <div>
+            <h3>Engineering & Data</h3>
+            <span className="footer-meta-item">Algorithmic Crowd Engine</span>
+            <span className="footer-meta-item">Geospatial Transit Mapping</span>
+            <span className="footer-meta-item">UNESCO Railway Schedules</span>
+            <span className="footer-meta-item">Microclimate Tracking</span>
+          </div>
+        </div>
+
+        {/* Giant Watermark */}
+        <div className="footer-wordmark" aria-hidden="true">
+          TRAVELEASE.
+        </div>
+
+        {/* Bottom Bar */}
         <div className="footer-bottom">
-          <p>&copy; {new Date().getFullYear()} TravelEase. All rights reserved.</p>
+          <span>&copy; {new Date().getFullYear()} TravelEase Smart Tourism.</span>
+          <span>Ooty, Nilgiris // 11°24′ N • 76°42′ E</span>
+          <span>Leave only footprints, beat the crowds.</span>
         </div>
       </div>
     </footer>

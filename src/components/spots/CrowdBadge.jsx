@@ -7,12 +7,12 @@ const CrowdBadge = ({ level = 'low', size = 'sm', score }) => {
   const getLevelConfig = () => {
     switch (level?.toLowerCase()) {
       case 'high':
-        return { text: 'High', className: 'badge-high', color: 'var(--warm-coral)' };
+        return { text: 'HIGH CROWD', className: 'badge-high', color: 'var(--crowd-high-glow)' };
       case 'moderate':
-        return { text: 'Moderate', className: 'badge-moderate', color: '#F59E0B' };
+        return { text: 'MODERATE', className: 'badge-moderate', color: 'var(--crowd-mod-glow)' };
       case 'low':
       default:
-        return { text: 'Low', className: 'badge-low', color: 'var(--jungle-mint)' };
+        return { text: 'LOW CROWD', className: 'badge-low', color: 'var(--crowd-low-glow)' };
     }
   };
 
@@ -21,7 +21,7 @@ const CrowdBadge = ({ level = 'low', size = 'sm', score }) => {
   if (isLarge) {
     return (
       <div className={`crowd-badge-lg ${config.className}`}>
-        <div className="badge-lg-ring" style={{ borderColor: config.color }}>
+        <div className="badge-lg-ring">
           <div className="badge-lg-content">
             <span className="badge-lg-score">{score}%</span>
             <span className="badge-lg-label">{config.text}</span>
@@ -33,8 +33,8 @@ const CrowdBadge = ({ level = 'low', size = 'sm', score }) => {
 
   return (
     <div className={`crowd-badge-sm ${config.className}`}>
-      <span className="pulse-dot"></span>
-      <span className="badge-text">{config.text}</span>
+      <span className="badge-pulse-dot" style={{ backgroundColor: config.color }}></span>
+      <span className="badge-text">{config.text} {score !== undefined ? `• ${score}%` : ''}</span>
     </div>
   );
 };

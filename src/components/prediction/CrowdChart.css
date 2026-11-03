@@ -1,31 +1,43 @@
+/* TRAILHEAD CROWD CHART */
 .crowd-chart-wrapper {
   width: 100%;
 }
 
 .chart-legend {
   display: flex;
-  justify-content: flex-end;
-  gap: 1.5rem;
-  margin-bottom: 1rem;
+  align-items: center;
+  gap: 18px;
+  margin-bottom: 20px;
+  font-family: var(--mono);
+  font-size: 10px;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--quiet);
+  flex-wrap: wrap;
 }
 
 .legend-item {
   display: flex;
   align-items: center;
-  gap: 0.5rem;
-  font-family: 'Outfit', sans-serif;
-  font-size: 0.875rem;
-  color: #64748b;
+  gap: 7px;
 }
 
 .legend-dot {
-  width: 10px;
-  height: 10px;
+  width: 7px;
+  height: 7px;
   border-radius: 50%;
-  display: inline-block;
+  flex-shrink: 0;
+}
+
+.current-hour-indicator {
+  border: 1px solid var(--paper);
+  padding: 3px 7px;
+  border-radius: var(--radius-xs);
+  font-size: 8px;
+  color: var(--paper);
 }
 
 .chart-container {
-  height: 300px;
+  height: 260px;
   width: 100%;
 }

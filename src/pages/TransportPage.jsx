@@ -4,66 +4,127 @@ import './TransportPage.css';
 
 const TransportPage = () => {
   return (
-    <div className="transport-page">
-      <div className="transport-hero">
-        <h1 className="transport-title">How to Reach Ooty</h1>
-        <p className="transport-subtitle">Your comprehensive guide to traveling to the Queen of Hill Stations.</p>
-      </div>
+    <div className="transport-page page-section">
+      <div className="rail">
+        <p className="eyebrow accent">01 / High Altitude Transit</p>
+        <h1 className="transport-heading">How to Reach Ooty</h1>
+        <p className="page-intro">
+          Road gradients, mountain rail schedules, and terminal connections to the Queen of Hill Stations (2,240m).
+        </p>
 
-      <div className="transport-content">
+        {/* Airport & Railway Station Hub Cards */}
         <div className="hubs-grid">
-          <div className="hub-card">
-            <div className="hub-icon">
-              <svg viewBox="0 0 24 24" width="32" height="32" stroke="currentColor" strokeWidth="2" fill="none"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path></svg>
+          <div className="hub-card tech-card">
+            <span className="eyebrow muted">Primary Aviation Gateway</span>
+            <div className="hub-icon-row">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="28"
+                height="28"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="1.6"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+              >
+                <path d="M17.8 19.2 16 11l3.5-3.5C21 6 21.5 4 21 3c-1-.5-3 0-4.5 1.5L13 8 4.8 6.2c-.5-.1-.9.1-1.1.5l-.3.5c-.2.5-.1 1 .3 1.3L9 12l-2 3H4l-1 1 3 2 2 3 1-1v-3l3-2 3.5 5.3c.3.4.8.5 1.3.3l.5-.2c.4-.3.6-.7.5-1.2z" />
+              </svg>
+              <h3>Nearest Airport</h3>
             </div>
-            <h3>Nearest Airport</h3>
-            <p className="hub-name">{NEAREST_AIRPORT.name}</p>
-            <p className="hub-dist">{NEAREST_AIRPORT.distance} km away</p>
+            <h4>{NEAREST_AIRPORT.name} ({NEAREST_AIRPORT.code})</h4>
+            <p className="hub-dist">{NEAREST_AIRPORT.distance} • {NEAREST_AIRPORT.driveTime} drive</p>
+            <p className="hub-note">Direct flights from Delhi, Mumbai, Bengaluru, Chennai, and Hyderabad.</p>
           </div>
-          
-          <div className="hub-card">
-            <div className="hub-icon">
-              <svg viewBox="0 0 24 24" width="32" height="32" stroke="currentColor" strokeWidth="2" fill="none"><rect x="4" y="4" width="16" height="16" rx="2" ry="2"></rect><rect x="9" y="9" width="6" height="6"></rect><line x1="9" y1="1" x2="9" y2="4"></line><line x1="15" y1="1" x2="15" y2="4"></line><line x1="9" y1="20" x2="9" y2="23"></line><line x1="15" y1="20" x2="15" y2="23"></line><line x1="20" y1="9" x2="23" y2="9"></line><line x1="20" y1="14" x2="23" y2="14"></line><line x1="1" y1="9" x2="4" y2="9"></line><line x1="1" y1="14" x2="4" y2="14"></line></svg>
+
+          <div className="hub-card tech-card">
+            <span className="eyebrow muted">Railhead & Heritage Junction</span>
+            <div className="hub-icon-row">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="28"
+                height="28"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="1.6"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+              >
+                <rect width="16" height="16" x="4" y="3" rx="2" />
+                <path d="M4 11h16" />
+                <path d="M12 3v8" />
+                <path d="m8 19-2 3" />
+                <path d="m18 22-2-3" />
+                <path d="M8 15h0" />
+                <path d="M16 15h0" />
+              </svg>
+              <h3>Nearest Railway</h3>
             </div>
-            <h3>Nearest Railway</h3>
-            <p className="hub-name">{NEAREST_RAILWAY.name}</p>
-            <p className="hub-dist">{NEAREST_RAILWAY.distance} km away</p>
+            <h4>{NEAREST_RAILWAY.name} ({NEAREST_RAILWAY.code})</h4>
+            <p className="hub-dist">{NEAREST_RAILWAY.distance} • 1.5–2 hrs drive</p>
+            <p className="hub-note">{NEAREST_RAILWAY.connection}. Main junction: {NEAREST_RAILWAY.mainJunction}.</p>
           </div>
         </div>
 
-        <div className="toy-train-banner">
+        {/* UNESCO Toy Train Feature Banner */}
+        <div className="toy-train-banner tech-card">
           <div className="toy-train-content">
-            <h2>Nilgiri Mountain Railway</h2>
-            <p>Don't miss the UNESCO World Heritage toy train ride from Mettupalayam to Ooty. A breathtaking 5-hour journey through tunnels, bridges, and lush forests.</p>
+            <span className="eyebrow accent">UNESCO World Heritage // NMR 56136</span>
+            <h2>The Nilgiri Mountain Railway</h2>
+            <p>
+              Experience the historic rack-and-pinion steam locomotive climbing from Mettupalayam (325m) up to Udagamandalam (2,240m). A breathtaking 4.5-hour journey across 250 bridges, 16 mountain tunnels, and cliffside tea ravines.
+            </p>
+            <div className="train-stats-strip">
+              <span>🚂 Daily Departure: 07:10 AM (MTP)</span>
+              <span>•</span>
+              <span>🎫 IRCTC Booking: Open 120 Days Ahead</span>
+              <span>•</span>
+              <span>⏱ Duration: 4 hrs 45 mins</span>
+            </div>
           </div>
-          <svg viewBox="0 0 24 24" width="64" height="64" stroke="currentColor" strokeWidth="1.5" fill="none"><path d="M4 15s1-1 4-1 5 2 8 2 4-1 4-1V3s-1 1-4 1-5-2-8-2-4 1-4 1z"></path><line x1="4" y1="22" x2="4" y2="15"></line></svg>
         </div>
 
-        <h2 className="section-heading">Popular Routes</h2>
-        <div className="routes-container">
-          {TRANSPORT_ROUTES && TRANSPORT_ROUTES.cities.map((city, idx) => (
-            <div key={idx} className="route-card">
-              <div className="route-header">
-                <h3>{city.name} to Ooty ({city.distance})</h3>
-              </div>
-              <div className="modes-list">
-                {city.routes.map((route, mIdx) => (
-                  <div key={mIdx} className={`mode-item ${route.highlight ? 'highlight' : ''}`}>
-                    <div className="mode-type">
-                      <span className="mode-icon">{route.icon}</span>
-                      <span className="mode-label">By {route.mode}</span>
-                    </div>
-                    <div className="mode-details">
-                      <span className="mode-duration">{route.duration}</span>
-                      <span className="mode-cost">{route.cost}</span>
-                    </div>
-                    <p className="mode-desc">{route.description}</p>
-                    <p className="mode-tip">💡 {route.tips}</p>
-                  </div>
-                ))}
-              </div>
+        {/* City Routes */}
+        <div className="routes-section">
+          <div className="section-heading">
+            <div>
+              <p className="eyebrow accent">02 / Transit Matrix</p>
+              <h3>Intercity Approach Routes</h3>
             </div>
-          ))}
+            <span className="eyebrow muted">Updated Ghat Road Conditions</span>
+          </div>
+
+          <div className="routes-list">
+            {TRANSPORT_ROUTES &&
+              TRANSPORT_ROUTES.cities.map((city, idx) => (
+                <div key={idx} className="route-block tech-card">
+                  <div className="route-block-header">
+                    <div>
+                      <span className="eyebrow muted">Approach #{String(idx + 1).padStart(2, '0')}</span>
+                      <h3>{city.name} to Ooty</h3>
+                    </div>
+                    <span className="route-distance-pill">{city.distance}</span>
+                  </div>
+
+                  <div className="modes-grid">
+                    {city.routes.map((route, mIdx) => (
+                      <div key={mIdx} className={`mode-item ${route.highlight ? 'highlight-mode' : ''}`}>
+                        <div className="mode-header">
+                          <span className="mode-badge">By {route.mode}</span>
+                          <span className="mode-cost">{route.cost}</span>
+                        </div>
+                        <div className="mode-time">⏱ {route.duration}</div>
+                        <p className="mode-desc">{route.description}</p>
+                        <p className="mode-tip">
+                          <strong>Field Tip:</strong> {route.tips}
+                        </p>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              ))}
+          </div>
         </div>
       </div>
     </div>
